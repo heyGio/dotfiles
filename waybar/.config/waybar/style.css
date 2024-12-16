@@ -54,6 +54,8 @@ button:hover {
     background-color: #eb4d4b;
 }
 
+#hyprland\/language,
+#power-profiles-daemon,
 #pulseaudio,
 #clock,
 #battery,
@@ -107,6 +109,16 @@ button:hover {
 #battery {
     color: @green;
     border-bottom: 2px solid @green;
+}
+
+#power-profiles-daemon{
+    color: @green;
+    border-bottom: 2px solid @green;
+}
+
+#hyprland\/language{
+    color: @blue;
+    border-bottom: 2px solid @blue;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
