@@ -3,7 +3,7 @@ return {
 	{
 		"williamboman/mason-lspconfig.nvim",
 		opts = {
-			ensure_installed = { "lua_ls", "pyright", "basedpyright", "ruff", "stylya", "debugpy" },
+			ensure_installed = { "lua_ls", "pyright", "basedpyright", "ruff", "stylua"},
 		},
 	},
 	{
