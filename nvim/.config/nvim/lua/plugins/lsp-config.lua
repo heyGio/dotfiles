@@ -3,7 +3,7 @@ return {
 	{
 		"williamboman/mason-lspconfig.nvim",
 		opts = {
-			ensure_installed = { "lua_ls", "pyright", "basedpyright", "ruff"},
+			ensure_installed = { "lua_ls", "pyright", "basedpyright", "ruff" },
 		},
 	},
 	{
@@ -22,12 +22,14 @@ return {
 			},
 		},
 		config = function()
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
 			local lspconfig = require("lspconfig")
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			lspconfig.lua_ls.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
+
 			lspconfig.basedpyright.setup({
 				capabilities = capabilities,
 				settings = {
@@ -44,9 +46,7 @@ return {
 				},
 			})
 
-			lspconfig.ruff.setup({
-				capabilities = capabilities
-			})
+			lspconfig.ruff.setup({})
 
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
