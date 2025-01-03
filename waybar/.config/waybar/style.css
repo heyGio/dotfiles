@@ -38,6 +38,10 @@ button:hover {
     padding: 0 4px;
 }
 
+#workspaces label {
+    font-size: 19px;
+}
+
 #workspaces button.focused {
     background-color: rgba(0, 0, 0, 0.3);
     color: @rosewater;
@@ -54,7 +58,8 @@ button:hover {
     background-color: #eb4d4b;
 }
 
-#hyprland\/language,
+
+#language,
 #power-profiles-daemon,
 #pulseaudio,
 #clock,
@@ -111,14 +116,14 @@ button:hover {
     border-bottom: 2px solid @green;
 }
 
-#power-profiles-daemon{
+#power-profiles-daemon {
     color: @green;
     border-bottom: 2px solid @green;
 }
 
-#hyprland\/language{
-    color: @blue;
-    border-bottom: 2px solid @blue;
+#language {
+    color: @teal;
+    border-bottom: 2px solid @teal;
 }
 
 /* If workspaces is the leftmost module, omit left margin */

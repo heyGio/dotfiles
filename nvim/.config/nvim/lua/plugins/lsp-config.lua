@@ -9,6 +9,7 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
+			"saghen/blink.cmp",
 			{
 				"folke/lazydev.nvim",
 				ft = "lua", -- only load on lua files
@@ -46,7 +47,9 @@ return {
 				},
 			})
 
-			lspconfig.ruff.setup({})
+			lspconfig.ruff.setup({
+				capabilities = capabilities,
+			})
 
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})

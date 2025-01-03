@@ -1,59 +1,71 @@
 return {
-  {
-  'saghen/blink.cmp',
-  dependencies = 'rafamadriz/friendly-snippets',
+	{
+		"L3MON4D3/LuaSnip",
+		version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+		dependencies = {
+			{ "rafamadriz/friendly-snippets" },
+			{
+				"iurimateus/luasnip-latex-snippets.nvim",
+				requires = { "L3MON4D3/LuaSnip", "lervag/vimtex" },
+				config = function()
+					require("luasnip-latex-snippets").setup({ allow_on_markdown = true })
+					require("luasnip").config.setup({ enable_autosnippets = true })
+				end,
+			},
+		},
+	},
+	{
+		"saghen/blink.cmp",
+		dependencies = {},
 
-  version = 'v0.*',
+		version = "v0.*",
 
-  opts = {
-    keymap = { preset = 'default' },
+		opts = {
+			keymap = { preset = "default" },
 
-    appearance = {
-      use_nvim_cmp_as_default = true,
-      nerd_font_variant = 'mono'
-    },
+			appearance = {
+				use_nvim_cmp_as_default = true,
+				nerd_font_variant = "mono",
+			},
 
-    signature = { enabled = true }
-  },
-  },
+			signature = { enabled = true },
 
-  -- { "hrsh7th/cmp-nvim-lsp" },
-  -- {
-  --   "L3MON4D3/LuaSnip",
-  --   dependencies = { "saadparwaiz1/cmp_luasnip", "rafamadriz/friendly-snippets" },
-  -- },
+			completion = {
+				-- -- Display a preview of the selected item on the current line
+				-- ghost_text = { enabled = true },
 
-  -- {
-  -- 	"hrsh7th/nvim-cmp",
-  -- 	config = function()
-  -- 		local cmp = require("cmp")
-  -- 		require("luasnip.loaders.from_vscode").lazy_load()
-  --
-  -- 		cmp.setup({
-  -- 			snippet = {
-  -- 				-- REQUIRED - you must specify a snippet engine
-  -- 				expand = function(args)
-  -- 					require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
-  -- 				end,
-  -- 			},
-  -- 			window = {
-  -- 				completion = cmp.config.window.bordered(),
-  -- 				documentation = cmp.config.window.bordered(),
-  -- 			},
-  -- 			mapping = cmp.mapping.preset.insert({
-  -- 				["<C-b>"] = cmp.mapping.scroll_docs(-4),
-  -- 				["<C-f>"] = cmp.mapping.scroll_docs(4),
-  -- 				["<C-Space>"] = cmp.mapping.complete(),
-  -- 				["<C-e>"] = cmp.mapping.abort(),
-  -- 				["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-  -- 			}),
-  -- 			sources = cmp.config.sources({
-  -- 				{ name = "nvim_lsp" },
-  -- 				{ name = "luasnip" }, -- For luasnip users.
-  -- 			}, {
-  -- 				{ name = "buffer" },
-  -- 			}),
-  -- 		})
-  -- 	end,
-  -- },
+				menu = {
+					-- nvim-cmp style menu
+					draw = {
+						columns = {
+							{ "label", "label_description", gap = 1 },
+							{ "kind_icon", "kind" },
+						},
+					},
+				},
+
+				-- Show documentation when selecting a completion item
+				documentation = { auto_show = true, auto_show_delay_ms = 500 },
+			},
+
+			-- Snippets with luasnip
+			snippets = {
+				expand = function(snippet)
+					require("luasnip").lsp_expand(snippet)
+				end,
+				active = function(filter)
+					if filter and filter.direction then
+						return require("luasnip").jumpable(filter.direction)
+					end
+					return require("luasnip").in_snippet()
+				end,
+				jump = function(direction)
+					require("luasnip").jump(direction)
+				end,
+			},
+			sources = {
+				default = { "lsp", "path", "snippets", "luasnip", "buffer" },
+			},
+		},
+	},
 }

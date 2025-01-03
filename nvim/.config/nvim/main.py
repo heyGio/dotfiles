@@ -2,7 +2,6 @@ import time
 
 import numpy as np
 
-
 def fun(bello: int) -> int:
     x = 1
 
